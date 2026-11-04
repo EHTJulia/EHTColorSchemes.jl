@@ -7,8 +7,12 @@ visualization. Each map is exposed as a standard
 so applications can use the exact decoded table colors without adding a
 plotting backend to this package.
 
-The tables are verbatim copies of the upstream `ehtplot` `.ctab` files. For
-the map families, transforms, and visual examples, see the upstream
+The 182 bundled `.ctab` files are verbatim copies of the
+[`ehtplot/color/ctabs/`](https://github.com/liamedeiros/ehtplot/tree/master/ehtplot/color/ctabs)
+tables from [`ehtplot`](https://github.com/liamedeiros/ehtplot). Credit for
+`ehtplot` and its color tables goes to **Chi-kwan Chan** and **Lia Medeiros**;
+see [Chan & Medeiros 2021, ascl:2106.038](https://ascl.net/2106.038).
+For the map families, transforms, and visual examples, see the upstream
 [`ehtplot` colormap notebook](https://github.com/liamedeiros/ehtplot/blob/docs/docs/COLORMAPS.ipynb).
 
 Every table also has an in-memory reverse variant whose name appends `r`, such

@@ -1,9 +1,9 @@
 # Using with EHTJulia
 
-## Load an EHT imaging model
+## Load a black hole image
 
 Download [`jason_mad_eofn.txt`](https://github.com/achael/eht-imaging/blob/main/models/jason_mad_eofn.txt)
-from the public `eht-imaging` models directory. Pyehtim loads the text model;
+from the public image models in the `eht-imaging` library. Pyehtim loads the text model;
 save it as FITS before loading the shared `IntensityMap` with VLBISkyModels.
 
 ```julia
@@ -20,7 +20,7 @@ im = load_fits(fits_path, IntensityMap)
 The documentation build obtains its FITS input outside the repository. Model
 text files, generated FITS files, and rendered figures are not package assets.
 
-## Render the shared image
+## Plot the image
 
 Pass the table colors to `VLBISkyModels.imageviz`. The same `im` is used by all
 subsequent comparisons.
