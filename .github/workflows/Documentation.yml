@@ -18,11 +18,13 @@ jobs:
           version: lts
       - name: Prepare documentation environment
         run: julia --project=docs -e 'using Pkg; Pkg.develop(path=pwd()); Pkg.instantiate()'
+      - name: Install virtual display
+        run: sudo apt-get update && sudo apt-get install -y xvfb xauth
       - name: Build all plotting profiles
         env:
           GKSwstype: '100'
           MPLBACKEND: Agg
-        run: julia --project=docs docs/make.jl all
+        run: xvfb-run -a julia --project=docs docs/make.jl all
       - uses: actions/upload-artifact@v4
         with:
           name: documentation

@@ -45,13 +45,13 @@ function prepare_profile(profile)
     manifest = joinpath(PROFILE_DIR, profile, "Manifest.toml")
     isfile(manifest) && return
     expression = "using Pkg; Pkg.develop(path=ENV[\"EHT_DOCS_REPO\"]); Pkg.instantiate()"
-    return run(setenv(julia(profile, expression), profile_environment(profile)...))
+    return run(addenv(julia(profile, expression), profile_environment(profile)...))
 end
 
 function run_profile(profile)
     script = joinpath(PROFILE_DIR, profile, "run.jl")
     command = `$(Base.julia_cmd()) --startup-file=no --project=$(dirname(script)) $script $STAGE_DIR`
-    return run(setenv(command, profile_environment(profile)...))
+    return run(addenv(command, profile_environment(profile)...))
 end
 
 function required_outputs(profile)
