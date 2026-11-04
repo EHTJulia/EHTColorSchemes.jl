@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/><title>Plotting with EHTColorSchemes · EHTColorSchemes.jl</title><meta name="title" content="Plotting with EHTColorSchemes · EHTColorSchemes.jl"/><meta property="og:title" content="Plotting with EHTColorSchemes · EHTColorSchemes.jl"/><meta property="twitter:title" content="Plotting with EHTColorSchemes · EHTColorSchemes.jl"/><meta name="description" content="Documentation for EHTColorSchemes.jl."/><meta property="og:description" content="Documentation for EHTColorSchemes.jl."/><meta property="twitter:description" content="Documentation for EHTColorSchemes.jl."/><script data-outdated-warner src="../assets/warner.js"></script><link href="https://cdnjs.cloudflare.com/ajax/libs/lato-font/3.0.0/css/lato-font.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/juliamono/0.63.2/juliamono.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/fontawesome.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/solid.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/brands.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.8/katex.min.css" rel="stylesheet" type="text/css"/><script>documenterBaseURL=".."</script><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" data-main="../assets/documenter.js"></script><script src="../search_index.js"></script><script src="../siteinfo.js"></script><script src="../../versions.js"></script><link class="docs-theme-link" rel="stylesheet" type="text/css" href="../assets/themes/catppuccin-mocha.css" data-theme-name="catppuccin-mocha"/><link class="docs-theme-link" rel="stylesheet" type="text/css" href="../assets/themes/catppuccin-macchiato.css" data-theme-name="catppuccin-macchiato"/><link class="docs-theme-link" rel="stylesheet" type="text/css" href="../assets/themes/catppuccin-frappe.css" data-theme-name="catppuccin-frappe"/><link class="docs-theme-link" rel="stylesheet" type="text/css" href="../assets/themes/catppuccin-latte.css" data-theme-name="catppuccin-latte"/><link class="docs-theme-link" rel="stylesheet" type="text/css" href="../assets/themes/documenter-dark.css" data-theme-name="documenter-dark" data-theme-primary-dark/><link class="docs-theme-link" rel="stylesheet" type="text/css" href="../assets/themes/documenter-light.css" data-theme-name="documenter-light" data-theme-primary/><script src="../assets/themeswap.js"></script></head><body><div id="documenter"><nav class="docs-sidebar"><div class="docs-package-name"><span class="docs-autofit"><a href="../">EHTColorSchemes.jl</a></span></div><button class="docs-search-query input is-rounded is-small is-clickable my-2 mx-auto py-1 px-2" id="documenter-search-query">Search docs (Ctrl + /)</button><ul class="docs-menu"><li><a class="tocitem" href="../">Home</a></li><li><span class="tocitem">Tutorials</span><ul><li class="is-active"><a class="tocitem" href>Plotting with EHTColorSchemes</a><ul class="internal"><li><a class="tocitem" href="#UnicodePlots.jl"><span>UnicodePlots.jl</span></a></li><li><a class="tocitem" href="#Plots.jl"><span>Plots.jl</span></a></li><li><a class="tocitem" href="#Gadfly"><span>Gadfly</span></a></li><li><a class="tocitem" href="#Makie"><span>Makie</span></a></li><li><a class="tocitem" href="#Winston"><span>Winston</span></a></li><li><a class="tocitem" href="#PyPlot"><span>PyPlot</span></a></li><li><a class="tocitem" href="#PythonPlot"><span>PythonPlot</span></a></li></ul></li><li><a class="tocitem" href="../tutorial/">Using with EHTJulia</a></li></ul></li><li><a class="tocitem" href="../api/">API</a></li></ul><div class="docs-version-selector field has-addons"><div class="control"><span class="docs-label button is-static is-size-7">Version</span></div><div class="docs-selector control is-expanded"><div class="select is-fullwidth is-size-7"><select id="documenter-version-selector"></select></div></div></div></nav><div class="docs-main"><header class="docs-navbar"><a class="docs-sidebar-button docs-navbar-link fa-solid fa-bars is-hidden-desktop" id="documenter-sidebar-button" href="#"></a><nav class="breadcrumb"><ul class="is-hidden-mobile"><li><a class="is-disabled">Tutorials</a></li><li class="is-active"><a href>Plotting with EHTColorSchemes</a></li></ul><ul class="is-hidden-tablet"><li class="is-active"><a href>Plotting with EHTColorSchemes</a></li></ul></nav><div class="docs-right"><a class="docs-settings-button docs-navbar-link fa-solid fa-gear" id="documenter-settings-button" href="#" title="Settings"></a><a class="docs-article-toggle-button fa-solid fa-chevron-up" id="documenter-article-toggle-button" href="javascript:;" title="Collapse all docstrings"></a></div></header><article class="content" id="documenter-page"><h1 id="Plotting-with-EHTColorSchemes"><a class="docs-heading-anchor" href="#Plotting-with-EHTColorSchemes">Plotting with EHTColorSchemes</a><a id="Plotting-with-EHTColorSchemes-1"></a><a class="docs-heading-anchor-permalink" href="#Plotting-with-EHTColorSchemes" title="Permalink"></a></h1><p>EHTColorSchemes returns standard <code>ColorSchemes.ColorScheme</code> values. See the <a href="https://juliagraphics.github.io/ColorSchemes.jl/">ColorSchemes.jl documentation</a> for its general API and the upstream <a href="https://github.com/liamedeiros/ehtplot/blob/docs/docs/COLORMAPS.ipynb"><code>ehtplot</code> colormap notebook</a> for map provenance and transformations. Every example below uses exact table colors from this package in its own plotting environment and process.</p><h2 id="UnicodePlots.jl"><a class="docs-heading-anchor" href="#UnicodePlots.jl">UnicodePlots.jl</a><a id="UnicodePlots.jl-1"></a><a class="docs-heading-anchor-permalink" href="#UnicodePlots.jl" title="Permalink"></a></h2><pre><code class="language-julia hljs">using EHTColorSchemes
+using UnicodePlots
+
+scheme = colorscheme(:copper_u)
+UnicodePlots.truecolors!()
+plot = heatmap([sin(x) * cos(y) for x in 1:20, y in 1:20];
+    title = &quot;copper_u&quot;,
+    colormap = [(color.r, color.g, color.b) for color in scheme.colors])
+show(IOContext(stdout, :color =&gt; true), MIME(&quot;text/plain&quot;), plot)</code></pre><p><img src="assets/unicodeplots.svg" alt="UnicodePlots copper_u terminal rendering"/></p><h2 id="Plots.jl"><a class="docs-heading-anchor" href="#Plots.jl">Plots.jl</a><a id="Plots.jl-1"></a><a class="docs-heading-anchor-permalink" href="#Plots.jl" title="Permalink"></a></h2><p>The ColorSchemes.jl guide demonstrates a filled contour and a multi-series palette separately. This profile uses the same plot types with <code>hot_u</code> and <code>cubehelix_u</code>.</p><h3 id="Filled-contour"><a class="docs-heading-anchor" href="#Filled-contour">Filled contour</a><a id="Filled-contour-1"></a><a class="docs-heading-anchor-permalink" href="#Filled-contour" title="Permalink"></a></h3><pre><code class="language-julia hljs">using EHTColorSchemes
+using Plots
+
+x = 1:0.3:20
+scheme = colorscheme(:hot_u)
+fig = contour(x, x, (x, y) -&gt; sin(x) + cos(y);
+    fill = true, c = cgrad(scheme.colors), title = &quot;hot_u&quot;)
+savefig(fig, &quot;plots-contour.png&quot;)</code></pre><p><img src="assets/plots-contour.png" alt="Plots filled contour using hot_u"/></p><h3 id="Multi-series-palette"><a class="docs-heading-anchor" href="#Multi-series-palette">Multi-series palette</a><a id="Multi-series-palette-1"></a><a class="docs-heading-anchor-permalink" href="#Multi-series-palette" title="Permalink"></a></h3><pre><code class="language-julia hljs">using EHTColorSchemes
+using Plots
+
+scheme = colorscheme(:cubehelix_u)
+palette = get.(Ref(scheme), range(0.05, 0.85; length = 20))
+fig = plot(Plots.fakedata(100, 20); w = 4,
+    background_color = :white, palette,
+    title = &quot;cubehelix_u&quot;)
+savefig(fig, &quot;plots-palette.png&quot;)</code></pre><p><img src="assets/plots-palette.png" alt="Plots multi-series palette using cubehelix_u"/></p><h2 id="Gadfly"><a class="docs-heading-anchor" href="#Gadfly">Gadfly</a><a id="Gadfly-1"></a><a class="docs-heading-anchor-permalink" href="#Gadfly" title="Permalink"></a></h2><pre><code class="language-julia hljs">using Cairo, ColorSchemes, EHTColorSchemes, Gadfly
+
+scheme = colorscheme(:gnuplot2_u)
+x = repeat(collect(1:20), inner = [20])
+y = repeat(collect(1:20), outer = [20])
+fig = plot(x = x, y = y, color = x + y, Geom.rectbin,
+    Scale.ContinuousColorScale(p -&gt; ColorSchemes.get(scheme, p)))
+draw(PNG(&quot;gadfly.png&quot;, 800px, 600px), fig)</code></pre><p><img src="assets/gadfly.png" alt="Gadfly gnuplot2_u"/></p><h2 id="Makie"><a class="docs-heading-anchor" href="#Makie">Makie</a><a id="Makie-1"></a><a class="docs-heading-anchor-permalink" href="#Makie" title="Permalink"></a></h2><p>The ColorSchemes.jl pattern passes a table&#39;s <code>colors</code> vector directly to the <code>colormap</code> keyword. <code>seismic_ur</code> is the generated reverse of the exact <code>seismic_u</code> table.</p><pre><code class="language-julia hljs">using CairoMakie
+using EHTColorSchemes
+
+coordinates = LinRange(-1, 1, 100)
+scheme = colorscheme(:seismic_ur)
+fig = Figure(; size = (900, 650))
+axis = Axis(fig[1, 1], title = &quot;seismic_ur&quot;)
+image!(axis, coordinates .* coordinates&#39;; colormap = scheme.colors)
+save(&quot;makie-seismic-ur.png&quot;, fig)</code></pre><p><img src="assets/makie-seismic-ur.png" alt="Makie matrix image using seismic_ur"/></p><p>The table catalog is generated from the public inventory. Numbered variants are omitted only to keep this overview legible.</p><pre><code class="language-julia hljs">catalog_names = filter(name -&gt; !occursin(r&quot;_\d&quot;, String(name)), scheme_names())
+rows = cld(length(catalog_names), 2)
+fig = Figure(; size = (1500, 40 * rows + 100))
+for (index, name) in enumerate(catalog_names)
+    row, column = mod1(index, rows), cld(index, rows)
+    axis = Axis(fig[row, column], title = String(name))
+    image!(axis, reshape(colorscheme(name).colors, :, 1))
+    hidedecorations!(axis)
+end
+save(&quot;eht-palettes.png&quot;, fig)</code></pre><p><img src="assets/eht-palettes.png" alt="Makie EHTColorSchemes catalog"/></p><h2 id="Winston"><a class="docs-heading-anchor" href="#Winston">Winston</a><a id="Winston-1"></a><a class="docs-heading-anchor-permalink" href="#Winston" title="Permalink"></a></h2><p>The <a href="https://juliagraphics.github.io/ColorSchemes.jl/dev/plotting/#Winston">ColorSchemes.jl Winston guide</a> has direct-table and densely sampled examples. Both use <code>gnuplot2_u</code> here.</p><pre><code class="language-julia hljs">using EHTColorSchemes
+using Winston
+
+scheme = colorscheme(:gnuplot2_u)
+Winston.colormap(scheme.colors)
+Winston.imagesc(reshape(1:10000, 100, 100))
+Winston.savefig(&quot;winston.png&quot;)</code></pre><img src="../assets/winston.png" alt="Winston direct gnuplot2_u table"/><pre><code class="language-julia hljs">using ColorSchemes
+
+smooth = [ColorSchemes.get(scheme, value) for value in 0:0.001:1]
+Winston.colormap(smooth)
+Winston.imagesc(reshape(1:10000, 100, 100))
+Winston.savefig(&quot;winston-smooth.png&quot;)</code></pre><img src="../assets/winston-smooth.png" alt="Winston densely sampled gnuplot2_u table"/><h2 id="PyPlot"><a class="docs-heading-anchor" href="#PyPlot">PyPlot</a><a id="PyPlot-1"></a><a class="docs-heading-anchor-permalink" href="#PyPlot" title="Permalink"></a></h2><p>This profile follows the <a href="https://juliagraphics.github.io/ColorSchemes.jl/dev/plotting/#PyPlot">ColorSchemes.jl PyPlot 3D surface example</a> with <code>Blues_lusr</code>, the generated reverse of <code>Blues_lus</code>.</p><pre><code class="language-julia hljs">using EHTColorSchemes
+using PyPlot
+
+scheme = colorscheme(:Blues_lusr)
+n = 100
+x = range(-3, 3; length = n); y = range(-3, 3; length = n)
+xgrid, ygrid = repeat(x&#39;, n, 1), repeat(y, 1, n)
+z = [2 * sin(x[i]) * 2 * cos(y[j]) for i in 1:n, j in 1:n]
+fig = figure(&quot;pyplot_surfaceplot&quot;, figsize = (7, 5))
+axis = fig.add_subplot(1, 1, 1; projection = &quot;3d&quot;)
+axis.plot_surface(xgrid, ygrid, z; rstride = 2, cstride = 2,
+    edgecolors = &quot;k&quot;, cmap = ColorMap(scheme.colors), alpha = 0.8, linewidth = 0.25)
+savefig(&quot;pyplot.png&quot;, bbox_inches = &quot;tight&quot;, pad_inches = 0)
+close(fig)</code></pre><img src="../assets/pyplot.png" alt="PyPlot 3D surface using Blues_lusr"/><h2 id="PythonPlot"><a class="docs-heading-anchor" href="#PythonPlot">PythonPlot</a><a id="PythonPlot-1"></a><a class="docs-heading-anchor-permalink" href="#PythonPlot" title="Permalink"></a></h2><p>PythonPlot uses PythonCall rather than PyCall. It uses the same 3D surface data, <code>plot_surface</code> arguments, and <code>ColorMap(Blues_lusr.colors)</code> as the PyPlot example. Julia&#39;s semicolon keyword syntax is required for PythonCall method calls. Its isolated CondaPkg environment provides Matplotlib.</p><pre><code class="language-julia hljs">ENV[&quot;MPLBACKEND&quot;] = &quot;Agg&quot;
+using EHTColorSchemes
+using PythonPlot
+
+scheme = colorscheme(:Blues_lusr)
+n = 100
+x = range(-3, 3; length = n); y = range(-3, 3; length = n)
+xgrid, ygrid = repeat(x&#39;, n, 1), repeat(y, 1, n)
+z = [2 * sin(x[i]) * 2 * cos(y[j]) for i in 1:n, j in 1:n]
+fig = figure(&quot;pythonplot_surfaceplot&quot;, figsize = (7, 5))
+axis = fig.add_subplot(1, 1, 1; projection = &quot;3d&quot;)
+axis.plot_surface(xgrid, ygrid, z; rstride = 2, cstride = 2,
+    edgecolors = &quot;k&quot;, cmap = ColorMap(scheme.colors), alpha = 0.8, linewidth = 0.25)
+fig.savefig(&quot;pythonplot.png&quot;, bbox_inches = &quot;tight&quot;, pad_inches = 0)
+plotclose(fig)</code></pre><img src="../assets/pythonplot.png" alt="PythonPlot 3D surface using Blues_lusr"/></article><nav class="docs-footer"><a class="docs-footer-prevpage" href="../">« Home</a><a class="docs-footer-nextpage" href="../tutorial/">Using with EHTJulia »</a><div class="flexbox-break"></div><p class="footer-message">Powered by <a href="https://github.com/JuliaDocs/Documenter.jl">Documenter.jl</a> and the <a href="https://julialang.org/">Julia Programming Language</a>.</p></nav></div><div class="modal" id="documenter-settings"><div class="modal-background"></div><div class="modal-card"><header class="modal-card-head"><p class="modal-card-title">Settings</p><button class="delete"></button></header><section class="modal-card-body"><p><label class="label">Theme</label><div class="select"><select id="documenter-themepicker"><option value="auto">Automatic (OS)</option><option value="documenter-light">documenter-light</option><option value="documenter-dark">documenter-dark</option><option value="catppuccin-latte">catppuccin-latte</option><option value="catppuccin-frappe">catppuccin-frappe</option><option value="catppuccin-macchiato">catppuccin-macchiato</option><option value="catppuccin-mocha">catppuccin-mocha</option></select></div></p><hr/><p>This document was generated with <a href="https://github.com/JuliaDocs/Documenter.jl">Documenter.jl</a> version 1.19.0 on <span class="colophon-date" title="Wednesday 4 November 2026 15:19">Wednesday 4 November 2026</span>. Using Julia version 1.10.13.</p></section><footer class="modal-card-foot"></footer></div></div></div></body></html>
