@@ -1,0 +1,7 @@
+[deps]
+ColorSchemes = "35d6a980-a343-548e-a6ea-1d62b119f2f4"
+EHTColorSchemes = "4f7c2e0e-6c77-4b6d-9f48-7c6e1b8a4a31"
+Winston = "bd07be1c-e76f-5ff0-9c0b-f51ef45303c6"
+
+[compat]
+julia = "1.9"

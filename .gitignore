@@ -1,0 +1,12 @@
+.DS_Store
+/Manifest.toml
+/docs/Manifest.toml
+/docs/build/
+/docs/assets/
+/docs/plotting/assets/
+/docs/tutorial/assets/
+/docs/.docs-stage/
+/docs/.documenter-src/
+/docs/profiles/**/Manifest.toml
+/docs/profiles/**/.CondaPkg/
+/.docs-build/

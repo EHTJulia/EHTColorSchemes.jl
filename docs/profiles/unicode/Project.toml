@@ -1,0 +1,6 @@
+[deps]
+EHTColorSchemes = "4f7c2e0e-6c77-4b6d-9f48-7c6e1b8a4a31"
+UnicodePlots = "b8865327-cd53-5732-bb35-84acbb429228"
+
+[compat]
+julia = "1.9"

@@ -1,0 +1,46 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  test:
+    name: Julia ${{ matrix.label }} on ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: ubuntu-latest
+            julia: lts
+            label: LTS
+          - os: macos-latest
+            julia: lts
+            label: LTS
+          - os: windows-latest
+            julia: lts
+            label: LTS
+          - os: ubuntu-latest
+            julia: '1'
+            label: latest 1.x
+    steps:
+      - uses: actions/checkout@v4
+      - uses: julia-actions/setup-julia@v2
+        with:
+          version: ${{ matrix.julia }}
+      - uses: julia-actions/julia-buildpkg@v1
+      - uses: julia-actions/julia-runtest@v1
+
+  format:
+    name: Runic
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: julia-actions/setup-julia@v2
+        with:
+          version: '1'
+      - name: Install Runic
+        run: julia --project=@runic -e 'using Pkg; Pkg.add("Runic")'
+      - name: Check formatting
+        run: julia --project=@runic -e 'using Runic; Runic.main(["--check", "src", "test", "docs"])'

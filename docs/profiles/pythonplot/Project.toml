@@ -1,0 +1,6 @@
+[deps]
+EHTColorSchemes = "4f7c2e0e-6c77-4b6d-9f48-7c6e1b8a4a31"
+PythonPlot = "274fc56d-3b97-40fa-a1cd-1b4a50311bf9"
+
+[compat]
+julia = "1.9"

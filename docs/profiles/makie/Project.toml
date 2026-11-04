@@ -1,0 +1,7 @@
+[deps]
+CairoMakie = "13f3f980-e62b-5c42-98c6-ff1f3baf88f0"
+EHTColorSchemes = "4f7c2e0e-6c77-4b6d-9f48-7c6e1b8a4a31"
+VLBISkyModels = "d6343c73-7174-4e0f-bb64-562643efbeca"
+
+[compat]
+julia = "1.9"
