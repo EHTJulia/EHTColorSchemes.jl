@@ -16,6 +16,18 @@ jobs:
       - uses: julia-actions/setup-julia@v2
         with:
           version: lts
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install Matplotlib for PyPlot
+        run: python -m pip install 'matplotlib>=3.7,<4'
+      - name: Prepare PyPlot environment
+        env:
+          PYTHON: ${{ env.pythonLocation }}/bin/python
+        run: |
+          "$PYTHON" -c 'import matplotlib; print(matplotlib.__version__)'
+          julia --project=docs/profiles/pyplot -e 'using Pkg; Pkg.develop(path=pwd()); Pkg.instantiate(); Pkg.build("PyCall")'
+          julia --project=docs/profiles/pyplot -e 'using PyPlot; println("PyCall Python: ", PyPlot.PyCall.pyprogramname); @assert realpath(PyPlot.PyCall.pyprogramname) == realpath(ENV["PYTHON"]); println("Matplotlib: ", PyPlot.matplotlib.__version__)'
       - name: Prepare documentation environment
         run: julia --project=docs -e 'using Pkg; Pkg.develop(path=pwd()); Pkg.instantiate()'
       - name: Install virtual display
@@ -24,6 +36,7 @@ jobs:
         env:
           GKSwstype: '100'
           MPLBACKEND: Agg
+          PYTHON: ${{ env.pythonLocation }}/bin/python
         run: xvfb-run -a julia --project=docs docs/make.jl all
       - uses: actions/upload-artifact@v4
         with:
