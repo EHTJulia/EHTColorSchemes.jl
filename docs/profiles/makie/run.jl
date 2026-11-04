@@ -22,8 +22,10 @@ figure = imageviz(image; size = (600, 500), colormap = scheme.colors)
 save(joinpath(stage, "blackhole-imageviz.png"), figure)
 
 values = extrema(parent(image))
-names = (:afmhot_u, :afmhot_10u, :afmhot_30u, :afmhot_50u,
-    :afmhot_us, :afmhot_10us, :afmhot_30us, :afmhot_50us)
+names = (
+    :afmhot_u, :afmhot_10u, :afmhot_30u, :afmhot_50u,
+    :afmhot_us, :afmhot_10us, :afmhot_30us, :afmhot_50us,
+)
 all(name in scheme_names() for name in names) || error("missing afmhot table")
 figure = Figure(; size = (1100, 1500))
 axes = [Axis(figure[i, j], xreversed = true, aspect = 1) for i in 1:4, j in 1:2]

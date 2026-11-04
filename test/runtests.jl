@@ -21,10 +21,17 @@ using EHTColorSchemes
         scheme = colorscheme(name)
         @test scheme isa ColorSchemes.ColorScheme
         @test length(scheme.colors) == 256
-        @test all(color -> all(component -> isfinite(component) && 0 <= component <= 1,
-            (red(color), green(color), blue(color))), scheme.colors)
-        @test scheme.colors == EHTColorSchemes._load_ctab(joinpath(
-            EHTColorSchemes._CTAB_DIR, String(name) * ".ctab"))
+        @test all(
+            color -> all(
+                component -> isfinite(component) && 0 <= component <= 1,
+                (red(color), green(color), blue(color))
+            ), scheme.colors
+        )
+        @test scheme.colors == EHTColorSchemes._load_ctab(
+            joinpath(
+                EHTColorSchemes._CTAB_DIR, String(name) * ".ctab"
+            )
+        )
         @test ColorSchemes.get(scheme, 0.0) == first(scheme.colors)
         @test ColorSchemes.get(scheme, 1.0) == last(scheme.colors)
         @test ColorSchemes.resample(scheme, 256).colors == scheme.colors
@@ -37,8 +44,12 @@ using EHTColorSchemes
         @test reversed isa ColorSchemes.ColorScheme
         @test reversed.colors == reverse(scheme.colors)
         @test length(reversed.colors) == 256
-        @test all(color -> all(component -> isfinite(component) && 0 <= component <= 1,
-            (red(color), green(color), blue(color))), reversed.colors)
+        @test all(
+            color -> all(
+                component -> isfinite(component) && 0 <= component <= 1,
+                (red(color), green(color), blue(color))
+            ), reversed.colors
+        )
         @test ColorSchemes.get(reversed, 0.0) == first(reversed.colors)
         @test ColorSchemes.get(reversed, 1.0) == last(reversed.colors)
     end
@@ -51,8 +62,10 @@ using EHTColorSchemes
     @test occursin("afmhot_us.ctab", colorscheme(:afmhot_us).notes)
     @test occursin("Reverse", colorscheme(:afmhot_usr).notes)
     @test_nowarn EHTColorSchemes._register_tables()
-    @test_throws ArgumentError EHTColorSchemes._register_colors(:afmhot_us,
-        reverse(colorscheme(:afmhot_us).colors), "conflicting test colors")
+    @test_throws ArgumentError EHTColorSchemes._register_colors(
+        :afmhot_us,
+        reverse(colorscheme(:afmhot_us).colors), "conflicting test colors"
+    )
     @test_throws ArgumentError colorscheme(:missing)
     @test_throws ArgumentError colorscheme("missing")
 

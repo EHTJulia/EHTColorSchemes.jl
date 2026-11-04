@@ -1,4 +1,10 @@
 # EHTColorSchemes.jl
+[![docs | dev](https://img.shields.io/badge/docs-dev-blue.svg)](https://ehtjulia.github.io/EHTColorSchemes.jl/dev/)
+[![docs | stable](https://img.shields.io/badge/docs-stable-blue.svg)](https://ehtjulia.github.io/EHTColorSchemes.jl/stable/)
+[![CI](https://github.com/EHTJulia/EHTColorSchemes.jl/actions/workflows/CI.yml/badge.svg)](https://github.com/EHTJulia/EHTColorSchemes.jl/actions/workflows/CI.yml)
+[![codecov](https://codecov.io/gh/EHTJulia/EHTColorSchemes.jl/branch/main/graph/badge.svg)](https://codecov.io/gh/EHTJulia/EHTColorSchemes.jl)
+[![Runic](https://img.shields.io/badge/code%20style-Runic-blue)](https://github.com/fredrikekre/Runic.jl)
+[![ColPrac](https://img.shields.io/badge/ColPrac-contributor%20guidelines-blueviolet)](https://github.com/SciML/ColPrac)
 
 EHTColorSchemes provides the 182 table-backed `ehtplot` color maps as standard
 [`ColorSchemes.jl`](https://github.com/JuliaGraphics/ColorSchemes.jl)

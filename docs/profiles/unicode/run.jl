@@ -5,15 +5,17 @@ stage = only(ARGS)
 mkpath(stage)
 scheme = colorscheme(:copper_u)
 UnicodePlots.truecolors!()
-plot = UnicodePlots.heatmap([sin(x) * cos(y) for x in 1:20, y in 1:20];
+plot = UnicodePlots.heatmap(
+    [sin(x) * cos(y) for x in 1:20, y in 1:20];
     colormap = [(color.r, color.g, color.b) for color in scheme.colors],
-    title = "copper_u")
+    title = "copper_u"
+)
 
 terminal = sprint(io -> show(IOContext(io, :color => true), MIME("text/plain"), plot))
 write(joinpath(stage, "unicodeplots.txt"), terminal)
 
 function html_escape(text)
-    replace(text, "&" => "&amp;", "<" => "&lt;", ">" => "&gt;", '"' => "&quot;")
+    return replace(text, "&" => "&amp;", "<" => "&lt;", ">" => "&gt;", '"' => "&quot;")
 end
 
 function ansi_to_svg(terminal)
@@ -38,13 +40,16 @@ function ansi_to_svg(terminal)
             else
                 x = padding + column * char_width
                 y = padding + (row + 1) * line_height - 4
-                background !== nothing && print(body,
-                    "<rect x=\"$x\" y=\"$(y - line_height + 4)\" width=\"$char_width\" height=\"$line_height\" fill=\"$(color_value(background))\"/>")
+                background !== nothing && print(
+                    body,
+                    "<rect x=\"$x\" y=\"$(y - line_height + 4)\" width=\"$char_width\" height=\"$line_height\" fill=\"$(color_value(background))\"/>"
+                )
                 fill = foreground === nothing ? "currentColor" : color_value(foreground)
                 print(body, "<text x=\"$x\" y=\"$y\" fill=\"$fill\">", html_escape(string(character)), "</text>")
                 column += 1
             end
         end
+        return
     end
 
     position = firstindex(terminal)
@@ -77,8 +82,8 @@ function ansi_to_svg(terminal)
     width = 2 * padding + widest * char_width
     height = 2 * padding + max(row, 1) * line_height
     return """<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"$width\" height=\"$height\" viewBox=\"0 0 $width $height\" role=\"img\" aria-label=\"UnicodePlots copper_u terminal rendering\">
-<style>svg { background: #fff; color: #222; } text { font: 14px JuliaMono, ui-monospace, SFMono-Regular, Menlo, monospace; } @media (prefers-color-scheme: dark) { svg { background: #1e1e1e; color: #e6e6e6; } }</style>
-$(String(take!(body)))</svg>"""
+    <style>svg { background: #fff; color: #222; } text { font: 14px JuliaMono, ui-monospace, SFMono-Regular, Menlo, monospace; } @media (prefers-color-scheme: dark) { svg { background: #1e1e1e; color: #e6e6e6; } }</style>
+    $(String(take!(body)))</svg>"""
 end
 
 write(joinpath(stage, "unicodeplots.svg"), ansi_to_svg(terminal))

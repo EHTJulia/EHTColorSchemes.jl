@@ -43,8 +43,10 @@ function _load_ctab(path::AbstractString)
         end
         # `.ctab` channels are 10-bit integers; preserve the upstream decoding
         # rule while guarding malformed out-of-range input.
-        result[index] = RGB(clamp(channels[1] / 1023, 0, 1),
-            clamp(channels[2] / 1023, 0, 1), clamp(channels[3] / 1023, 0, 1))
+        result[index] = RGB(
+            clamp(channels[1] / 1023, 0, 1),
+            clamp(channels[2] / 1023, 0, 1), clamp(channels[3] / 1023, 0, 1)
+        )
     end
     return result
 end
@@ -79,17 +81,21 @@ end
 function _register_tables()
     for name in _CTAB_NAMES
         colors = _table(name)
-        _register_colors(name, colors,
-            "Source table $(name).ctab; integer channels divided by 1023 and clipped to [0, 1].")
+        _register_colors(
+            name, colors,
+            "Source table $(name).ctab; integer channels divided by 1023 and clipped to [0, 1]."
+        )
         reverse_name = Symbol(string(name) * "r")
-        _register_colors(reverse_name, reverse(colors),
-            "Reverse of source table $(name).ctab; integer channels divided by 1023 and clipped to [0, 1].")
+        _register_colors(
+            reverse_name, reverse(colors),
+            "Reverse of source table $(name).ctab; integer channels divided by 1023 and clipped to [0, 1]."
+        )
     end
     return nothing
 end
 
 function __init__()
-    _register_tables()
+    return _register_tables()
 end
 
 end

@@ -10,8 +10,10 @@ const ASSET_DIR = joinpath(DOCS_DIR, "assets")
 const PLOTTING_ASSET_DIR = joinpath(DOCS_DIR, "plotting", "assets")
 const TUTORIAL_ASSET_DIR = joinpath(DOCS_DIR, "tutorial", "assets")
 const BUILD_DIR = joinpath(REPO_DIR, ".docs-build")
-const PYTHONPLOT_CONDA_DIR = get(ENV, "EHT_DOCS_PYTHONPLOT_CONDA",
-    "@ehtcolorschemes-pythonplot")
+const PYTHONPLOT_CONDA_DIR = get(
+    ENV, "EHT_DOCS_PYTHONPLOT_CONDA",
+    "@ehtcolorschemes-pythonplot"
+)
 const CORE_PROFILES = ("unicode", "makie")
 const ALL_PROFILES = ("unicode", "makie", "plots", "gadfly", "winston", "pyplot", "pythonplot")
 
@@ -43,20 +45,22 @@ function prepare_profile(profile)
     manifest = joinpath(PROFILE_DIR, profile, "Manifest.toml")
     isfile(manifest) && return
     expression = "using Pkg; Pkg.develop(path=ENV[\"EHT_DOCS_REPO\"]); Pkg.instantiate()"
-    run(setenv(julia(profile, expression), profile_environment(profile)...))
+    return run(setenv(julia(profile, expression), profile_environment(profile)...))
 end
 
 function run_profile(profile)
     script = joinpath(PROFILE_DIR, profile, "run.jl")
     command = `$(Base.julia_cmd()) --startup-file=no --project=$(dirname(script)) $script $STAGE_DIR`
-    run(setenv(command, profile_environment(profile)...))
+    return run(setenv(command, profile_environment(profile)...))
 end
 
 function required_outputs(profile)
     profile == "unicode" && return ("unicodeplots.txt", "unicodeplots.svg")
-    profile == "makie" && return ("blackhole-imageviz.png", "afmhot-multipanel.png",
+    profile == "makie" && return (
+        "blackhole-imageviz.png", "afmhot-multipanel.png",
         "afmhot-gradient.png", "family-comparison.png", "eht-palettes.png",
-        "makie-seismic-ur.png")
+        "makie-seismic-ur.png",
+    )
     profile == "winston" && return ("winston.png", "winston-smooth.png")
     profile == "pyplot" && return ("pyplot.png",)
     profile == "pythonplot" && return ("pythonplot.png",)
@@ -69,6 +73,7 @@ function validate_profile(profile)
         path = joinpath(STAGE_DIR, name)
         isfile(path) && filesize(path) > 0 || error("$profile did not create $name")
     end
+    return
 end
 
 function profile_result(profile)
@@ -82,7 +87,7 @@ function write_status(statuses)
         push!(lines, "- `$profile`: $result")
     end
     write(joinpath(STAGE_DIR, "profile-status.md"), join(lines, "\n") * "\n")
-    ENV["EHT_DOCS_PROFILE_STATUS"] = join(lines[3:end], "\n")
+    return ENV["EHT_DOCS_PROFILE_STATUS"] = join(lines[3:end], "\n")
 end
 
 function prepare_assets(profiles)
@@ -109,9 +114,11 @@ function prepare_assets(profiles)
     for name in readdir(STAGE_DIR)
         cp(joinpath(STAGE_DIR, name), joinpath(ASSET_DIR, name); force = true)
     end
-    for name in ("unicodeplots.svg", "plots-contour.png", "plots-palette.png", "gadfly.png",
+    for name in (
+            "unicodeplots.svg", "plots-contour.png", "plots-palette.png", "gadfly.png",
             "makie-seismic-ur.png", "eht-palettes.png", "winston.png", "winston-smooth.png",
-            "pyplot.png", "pythonplot.png")
+            "pyplot.png", "pythonplot.png",
+        )
         source = joinpath(STAGE_DIR, name)
         isfile(source) && cp(source, joinpath(PLOTTING_ASSET_DIR, name); force = true)
     end
@@ -129,6 +136,7 @@ function publish_staged_assets()
         source = joinpath(STAGE_DIR, name)
         isfile(source) && cp(source, joinpath(build_assets, name); force = true)
     end
+    return
 end
 
 function prepare_documenter_source()
@@ -144,21 +152,28 @@ function prepare_documenter_source()
         mkpath(dirname(destination))
         cp(source, destination; force = true)
     end
+    return
 end
 
 profile = isempty(ARGS) ? "core" : only(ARGS)
 try
     statuses = prepare_assets(selected_profiles(profile))
     prepare_documenter_source()
-    makedocs(; sitename = "EHTColorSchemes.jl", source = SOURCE_DIR, build = BUILD_DIR,
+    makedocs(;
+        sitename = "EHTColorSchemes.jl", source = SOURCE_DIR, build = BUILD_DIR,
         clean = true, remotes = nothing, checkdocs = :none,
-        pages = ["Home" => "index.md",
-            "Tutorials" => ["Plotting with EHTColorSchemes" => "plotting.md",
-                "Using with EHTJulia" => "tutorial.md"],
-            "API" => "api.md"])
+        pages = [
+            "Home" => "index.md",
+            "Tutorials" => [
+                "Plotting with EHTColorSchemes" => "plotting.md",
+                "Using with EHTJulia" => "tutorial.md",
+            ],
+            "API" => "api.md",
+        ]
+    )
     publish_staged_assets()
-    any(contains(result, "failed") for result in values(statuses)) &&
-        error("one or more plotting profiles failed; see the generated documentation status")
+    any(result != "passed" for result in values(statuses)) &&
+        error("one or more plotting profiles did not pass; see the generated documentation status")
 finally
     isdir(SOURCE_DIR) && rm(SOURCE_DIR; recursive = true)
     isdir(ASSET_DIR) && rm(ASSET_DIR; recursive = true)
