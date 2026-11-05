@@ -1,6 +1,6 @@
 # EHTColorSchemes.jl
 
-EHTColorSchemes provides 182 table-backed color maps used by
+EHTColorSchemes provides 182 table-backed color maps derived by
 [`ehtplot`](https://github.com/liamedeiros/ehtplot) for EHT and VLBI image
 visualization. Each map is exposed as a standard
 [`ColorSchemes.jl`](https://juliagraphics.github.io/ColorSchemes.jl/) object,
